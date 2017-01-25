@@ -14,36 +14,70 @@ public class UnitDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     public void OnDrag(PointerEventData e) {
 
-        SetDraggedPosition(e);
-    }
-
-    public void OnEndDrag(PointerEventData e) {
-
-        BackToOriginPos(e);
-    }
-
-    private void SetDraggedPosition(PointerEventData e) {
-
         var rt = gameObject.GetComponent<RectTransform>();
 
         Vector3 globalMousePos;
-        if(RectTransformUtility.ScreenPointToWorldPointInRectangle(rt, e.position, e.pressEventCamera, out globalMousePos)) {
+        if(RectTransformUtility.ScreenPointToWorldPointInRectangle(rt,e.position,e.pressEventCamera,out globalMousePos)) {
             rt.position = globalMousePos;
         }
     }
 
-    private void BackToOriginPos(PointerEventData e) {
+    public void OnEndDrag(PointerEventData e) {
+
+        EndJudging(e);
+    }
+
+
+    private void EndJudging(PointerEventData e) {
 
         var rt = gameObject.GetComponent<RectTransform>();
 
-        if (rt.position.x > 665 && rt.position.x < 855) {
-            if(rt.position.y > 850 && rt.position.y < 950) {
-                GameObject.Find("NO.1").GetComponent<Material>().color = Color.red;
-                Debug.Log("Touch");
-            }
+        //Debug.Log("ugui position: x-" + rt.position.x + "  y-" + rt.position.y);
+        //Debug.Log("World position: x-" + Camera.main.ScreenToWorldPoint(rt.position).x + " y-" + Camera.main.ScreenToWorldPoint(rt.position).y);
+        Vector3 globalMousePos;
+        if(RectTransformUtility.ScreenPointToWorldPointInRectangle(rt, e.position, e.pressEventCamera, out globalMousePos)) {
+            //Debug.Log(globalMousePos);
+        }
+
+        //Vector3 temp;
+        var tem = GameObject.Find("1").GetComponent<RectTransform>();
+        //if(RectTransformUtility.ScreenPointToWorldPointInRectangle(tem,Camera.main.WorldToScreenPoint(tem.position),Camera.main,out temp)) {
+        //    Debug.Log(temp);
+        //}
+        if(isContained (rt, tem)) {
+
+            Debug.Log("Contained!");
         } else {
+
             rt.position = oriPos;
         }
         
+        
+    }
+
+    private bool isContained(RectTransform whichIn,RectTransform whichHere) {
+
+        Vector3 VecIn, VecHere;
+        if (RectTransformUtility.ScreenPointToWorldPointInRectangle(
+                whichIn,
+                Camera.main.WorldToScreenPoint(whichIn.position),
+                Camera.main, 
+                out VecIn) && 
+            RectTransformUtility.ScreenPointToWorldPointInRectangle(
+                whichHere,
+                Camera.main.WorldToScreenPoint(whichHere.position),
+                Camera.main,
+                out VecHere)) {
+
+            //Debug.Log(VecIn);
+            //Debug.Log(VecHere);
+            if (Mathf.Abs(VecIn.x - VecHere.x) < 0.2 && Mathf.Abs(VecIn.y - VecHere.y) < 0.2) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
     }
 }
