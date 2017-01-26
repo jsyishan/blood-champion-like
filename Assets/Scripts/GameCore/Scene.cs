@@ -28,9 +28,10 @@ public class Scene {
 
 public class Level : Scene {
 
-    public Level(string level_name) {
+    public Level(string level_name, string level_paras = "") {
 
         scene_name = level_name;
+        LevelParas (level_paras);
     }
 
     public override void Enter() {
@@ -38,5 +39,15 @@ public class Level : Scene {
         SceneManager.LoadSceneAsync("Scenes/" + scene_name);
     }
 
+    private void LevelParas(string paras) {
+
+        switch(paras) {
+            case "2players":
+                
+                break;
+            default:
+                break;
+        }
+    }
 
 }

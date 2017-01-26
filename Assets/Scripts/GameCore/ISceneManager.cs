@@ -6,6 +6,7 @@ public class ISceneManager : GameManager {
 
     public Scene nowScene = null;
 
+
 	public void Start () {
         
 	}
@@ -33,12 +34,13 @@ public class ISceneManager : GameManager {
         nowScene = s;
         nowScene.Enter();
 
-        Debug.Log("Now Scene is " + nowScene.scene_name);
+        Debug.Log("The Current Scene is " + nowScene.scene_name);
     }
 
-    public Scene CreateLevel(string level) {
+    public Scene CreateLevel(string level, string paras = "") {
 
-        return new Level(level);
+        return new Level(level, paras);
     }
+
 
 }
