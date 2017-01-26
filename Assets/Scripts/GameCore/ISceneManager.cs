@@ -7,7 +7,7 @@ public class ISceneManager : GameManager {
     public Scene nowScene = null;
 
 	public void Start () {
-
+        
 	}
 	
 	public void Update () {

@@ -13,9 +13,9 @@ public interface GameManager {
 public class MainCore : MonoBehaviour {
 
     public static ISceneManager scene_manager = new ISceneManager();
+    public static SpawnManager spawn_manager = new SpawnManager();
 
     List<GameManager> game_manager = new List<GameManager>();
-
 
 
     void Awake () {
@@ -50,22 +50,6 @@ public class MainCore : MonoBehaviour {
             game_manager[i].Destroy();
             game_manager[i] = null;
         }
-    }
-
-
-    public void ChangeScene(string scene) {
-
-        scene_manager.ChangeScene(scene_manager.CreateLevel(scene));
-    }
-
-    public void Exit() {
-
-        RectTransform exit_panel = GameObject.Find("Exit_Panel").GetComponent<RectTransform>();
-        RectTransform block = GameObject.Find("Main_Menu_block").GetComponent<RectTransform>();
-
-        block.anchoredPosition = new Vector2(656, 0);
-        exit_panel.anchoredPosition = new Vector2(0, 0);
-
     }
 
 }
