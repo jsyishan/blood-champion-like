@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class ISceneManager : GameManager {
 
     public Scene nowScene = null;

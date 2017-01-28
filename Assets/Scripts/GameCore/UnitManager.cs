@@ -6,7 +6,6 @@ public class UnitManager : GameManager {
 
     public List<Unit> units = new List<Unit> ();
 
-    
 
     public void Start() {
 
@@ -21,19 +20,6 @@ public class UnitManager : GameManager {
 
     }
 
-
-    public string GetUnitName(string u_name) {
-        return "Unit_" + u_name;
-    }
-
-
-
-    private void OnSpawn(bool ifSpawn) {
-
-        if(ifSpawn) {
-           // SpawnCore
-        }
-    }
 
     private void ResolveSpawnOrderList() {
 

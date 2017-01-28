@@ -6,23 +6,32 @@ using UnityEngine;
 public class SpawnCore : MonoBehaviour {
 
     [Header ("Spawn Field")]
-    public static Transform[] spawn_field = null;
+    public Transform[] spawn_field = null;
 
 
-    private bool ifSpawn = false;
-    private bool ifTime = false;
+    private float SPAWN_TIME = 2.0f;
+    private float spawn_time = 2.0f;
+
 
     void Start() {
-        
+
+        for(int i = 0; i < MainCore.spawn_manager.spawn_order.Count; i++) {
+            foreach(Spawn s in MainCore.spawn_manager.spawn_order[i]) {
+                var go = Instantiate (Resources.Load ("Prefabs/Spawner"),
+                    new Vector3 (spawn_field[0].position.x, spawn_field[0].position.y + 1, spawn_field[0].position.z),
+                    new Quaternion (0, 0, 0, 0),
+                    this.transform
+                    ) as GameObject;
+                var spawner = go.GetComponent<Spawner> ();
+                spawner.SetSpawnData (s, spawn_time);
+                spawn_time += SPAWN_TIME;
+            }
+        }
+
     }
 
     void Update() {
 
-        //if(ifSpawn) {
-        //    if (spawn_order.Count != 0) {
-        //        SpawnTimeCounter ();
-        //    }
-        //}
     }
 
     //private void SpawnTimeCounter() {
@@ -35,9 +44,6 @@ public class SpawnCore : MonoBehaviour {
     //    }
     //    ifTime = false;
     //}
-
-
-
 
 
 }

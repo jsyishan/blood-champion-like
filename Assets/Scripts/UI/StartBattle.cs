@@ -9,4 +9,5 @@ public class StartBattle : MonoBehaviour {
         MainCore.scene_manager.ChangeScene (MainCore.scene_manager.CreateLevel ("two_players"));
         MainCore.spawn_manager.ToSpawn ();
     }
+
 }
