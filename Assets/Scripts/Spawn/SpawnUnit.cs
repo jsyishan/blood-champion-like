@@ -78,6 +78,14 @@ public class SpawnUnit : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
                         //Debug.Log ("Order: 2");
                         spawn_order = 2;
                         break;
+                    case "Third_Spawn":
+                        //Debug.Log ("Order: 3");
+                        spawn_order = 3;
+                        break;
+                    case "Fourth_Spawn":
+                        //Debug.Log ("Order: 4");
+                        spawn_order = 4;
+                        break;
                     default:
                         //Debug.Log ("Not correct order");
                         spawn_order = 0;

@@ -24,6 +24,8 @@ public class MainCore : MonoBehaviour {
         DontDestroyOnLoad(transform.gameObject);
 
         game_manager.Add(scene_manager);
+        game_manager.Add (spawn_manager);
+        game_manager.Add (unit_manager);
 
         for (int i = 0; i < game_manager.Count; i++) {
             game_manager[i].Start();

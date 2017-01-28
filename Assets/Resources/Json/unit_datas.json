@@ -1,0 +1,20 @@
+{
+    "units": [
+        {
+            "name" : "Unit_R1",
+            "max_hp" : 500,
+            "atk" : 50,
+            "atk_fre" : 2,
+            "def" : 30,
+            "speed" : 10
+        },
+        {
+            "name" : "Unit_R2",
+            "max_hp" : 700,
+            "atk" : 45,
+            "atk_fre" : 3,
+            "def" : 40,
+            "speed" : 5
+        }
+    ]
+}

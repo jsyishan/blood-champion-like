@@ -8,7 +8,7 @@ public class ISceneManager : GameManager {
 
 
 	public void Start () {
-        
+
 	}
 	
 	public void Update () {
@@ -37,9 +37,9 @@ public class ISceneManager : GameManager {
         Debug.Log("The Current Scene is " + nowScene.scene_name);
     }
 
-    public Scene CreateLevel(string level, string paras = "") {
+    public Scene CreateLevel(string level) {
 
-        return new Level(level, paras);
+        return new Level(level);
     }
 
 
