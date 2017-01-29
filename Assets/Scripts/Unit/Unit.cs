@@ -17,13 +17,6 @@ public class Unit : MonoBehaviour {
 
     void Awake() {
 
-        //try {
-        //    var json = Resources.Load ("Json/unit_datas").ToString ();
-        //    ud = JsonUtility.FromJson<UnitData> (json);
-        //    Debug.Log (ud);
-        //} catch (Exception e) {
-        //    Debug.Log (e);
-        //}
     }
 
     void Start() {

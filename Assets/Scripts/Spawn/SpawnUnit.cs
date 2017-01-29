@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class SpawnUnit : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler {
 
@@ -52,6 +53,11 @@ public class SpawnUnit : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         if(target != null) {
             //Debug.Log ("Contained!");
             MainCore.spawn_manager.AddSpawn (MainCore.spawn_manager.NewSpawn(spawn_unit, spawn_order));
+
+            target.tag = "Untagged";
+            target.gameObject.GetComponent<Image> ().material = Resources.Load ("Materials/spawn_zone_set") as Material;
+
+            target.gameObject.GetComponentInChildren<Text> ().text = spawn_unit.ToUpper();
         } else {
             //Debug.Log ("Not correct space");
         }
@@ -85,6 +91,14 @@ public class SpawnUnit : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
                     case "Fourth_Spawn":
                         //Debug.Log ("Order: 4");
                         spawn_order = 4;
+                        break;
+                    case "Fifth_Spawn":
+                        //Debug.Log ("Order: 4");
+                        spawn_order = 5;
+                        break;
+                    case "Sixth_Spawn":
+                        //Debug.Log ("Order: 4");
+                        spawn_order = 6;
                         break;
                     default:
                         //Debug.Log ("Not correct order");

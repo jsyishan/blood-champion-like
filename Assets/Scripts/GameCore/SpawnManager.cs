@@ -8,7 +8,7 @@ public class SpawnManager : GameManager {
     List<Spawn> spawn_list = new List<Spawn> ();
     public List<List<Spawn>> spawn_order = new List<List<Spawn>> ();
 
-    private int ORDER_COUNT = 2;
+    private int ORDER_COUNT = 6;
 
     public void Start() {
 
