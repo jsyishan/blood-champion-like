@@ -4,17 +4,9 @@ using UnityEngine;
 
 
 [System.Serializable]
-public class UnitsData {
-
-    public List<UnitData> unit_data;
-
-}
-
-[System.Serializable]
 public class UnitData {
 
     public string name;
-
     public float max_hp;
     public float atk;
     public float atk_fre;
@@ -22,3 +14,5 @@ public class UnitData {
     public float speed;
 
 }
+
+

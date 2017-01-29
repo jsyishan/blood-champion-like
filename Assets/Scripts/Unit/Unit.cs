@@ -6,23 +6,26 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour {
 
-    protected float max_hp;
-    protected float hp;
-    protected float atk;
-    protected float atk_fre;
-    protected float def;
-    protected float speed;
+    public float hp;
 
-    private UnitData ud = new UnitData();
+    public float max_hp;
+    public float atk;
+    public float atk_fre;
+    public float def;
+    public float speed;
 
-    void Awake() {
-
-    }
 
     void Start() {
 
         MainCore.unit_manager.units.Add (this.GetComponent<Unit> ());
+        GetData ();
     }
+
+    void OnDestroy() {
+
+        MainCore.unit_manager.units.Remove (this.GetComponent<Unit> ());
+    }
+
 
     public Unit GetEnemy(GameObject go) {
 
@@ -33,13 +36,8 @@ public class Unit : MonoBehaviour {
         }
     }
 
-
     public void BeDamaged(Unit enemy) {
         hp -= enemy.atk - def;
-    }
-
-    public float GetHp() {
-        return hp;
     }
 
     public void Attack() {
@@ -50,10 +48,26 @@ public class Unit : MonoBehaviour {
 
     }
 
+    protected void GetData() {
+
+        foreach (UnitData ud in MainCore.unit_manager.unitDataList) {
+
+            if (ud.name == this.name) {
+                max_hp = ud.max_hp;
+                atk = ud.atk;
+                atk_fre = ud.atk_fre;
+                def = ud.def;
+                speed = ud.speed;
+
+                hp = max_hp;
+            }
+        }
+    }
+
 }
 
 public class RemoteUnit : Unit {
 
-    private float atkDistance;
+    public float atkDistance;
 
 }

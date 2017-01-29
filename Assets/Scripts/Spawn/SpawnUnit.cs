@@ -37,17 +37,6 @@ public class SpawnUnit : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
         var rt = gameObject.GetComponent<RectTransform> ();
 
-        //Debug.Log("ugui position: x-" + rt.position.x + "  y-" + rt.position.y);
-        //Debug.Log("World position: x-" + Camera.main.ScreenToWorldPoint(rt.position).x + " y-" + Camera.main.ScreenToWorldPoint(rt.position).y);
-        //Vector3 globalMousePos;
-        //if (RectTransformUtility.ScreenPointToWorldPointInRectangle(rt, e.position, e.pressEventCamera, out globalMousePos)) {
-        //    //Debug.Log(globalMousePos);
-        //}
-        //Vector3 temp;
-        //var tem = GameObject.Find("1").GetComponent<RectTransform>();
-        //if(RectTransformUtility.ScreenPointToWorldPointInRectangle(tem,Camera.main.WorldToScreenPoint(tem.position),Camera.main,out temp)) {
-        //    Debug.Log(temp);
-        //}
         var target = SpawnOrder (rt);
 
         if(target != null) {

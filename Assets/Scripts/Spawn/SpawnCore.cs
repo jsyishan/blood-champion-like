@@ -30,20 +30,4 @@ public class SpawnCore : MonoBehaviour {
 
     }
 
-    void Update() {
-
-    }
-
-    //private void SpawnTimeCounter() {
-
-    //    spawn_time -= Time.deltaTime;
-    //    // Debug.Log (spawn_time);
-    //    if(spawn_time <= 0) {
-    //        spawn_time = 3.0f;
-    //        ifTime = true;
-    //    }
-    //    ifTime = false;
-    //}
-
-
 }

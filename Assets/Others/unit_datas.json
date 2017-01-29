@@ -1,5 +1,5 @@
 {
-    "UnitData": [
+    "units": [
         {
             "name" : "Unit_R1",
             "max_hp" : 500.0,

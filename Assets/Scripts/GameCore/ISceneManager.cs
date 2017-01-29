@@ -35,7 +35,7 @@ public class ISceneManager : GameManager {
         nowScene = s;
         nowScene.Enter();
 
-        Debug.Log("The Current Scene is " + nowScene.scene_name);
+        Debug.Log("The Current Scene is \" " + nowScene.scene_name + " \".");
     }
 
     public Scene CreateLevel(string level) {

@@ -1,26 +1,26 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
-using LitJson;
 
 public class UnitManager : GameManager {
 
     public List<Unit> units = new List<Unit> ();
-    public UnitsData units_data = new UnitsData ();
-    public List<UnitData> units_data_list = new List<UnitData> ();
 
-    private string jsonDataFileName = "unit_datas.json";
-    private JsonData jsonData;
+    public List<UnitData> unitDataList = new List<UnitData> ();
+    private string jsonString;
+    JSONObject units_datas;
 
     public void Start() {
 
         LoadDataFromJson ();
+        CreateAllUnitData ();
     }
 
     public void Update() {
 
-        
+
     }
 
     public void Destroy() {
@@ -29,26 +29,36 @@ public class UnitManager : GameManager {
 
     private void LoadDataFromJson() {
 
-        string jsonDataFilePath = Path.Combine (Application.streamingAssetsPath, jsonDataFileName);
+        string jsonDataFilePath = Application.dataPath + "/Others/unit_datas.json";
 
-        if(File.Exists (jsonDataFilePath)) {
+        if (File.Exists (jsonDataFilePath)) {
 
-            string dataAsJson = File.ReadAllText (jsonDataFilePath);
+            jsonString = File.ReadAllText (jsonDataFilePath);
+            units_datas = new JSONObject (jsonString);
 
-            units_data = JsonUtility.FromJson<UnitsData> (dataAsJson);
-            Debug.Log (units_data);
-            Debug.Log (units_data.unit_data);
-            //Debug.Log (units_data.unit_data[0]);
-            for(var i = 0; i < units_data.unit_data.Count; i++) {
-
-                UnitData ud = units_data.unit_data[i];
-                Debug.Log (ud.atk);
-                units_data_list.Add (ud);
-            }
         } else {
             Debug.LogError ("Cannot load json file!");
         }
     }
 
+    private void CreateAllUnitData() {
+
+        units_datas.GetField ("units", (JSONObject json_units) => {
+
+            foreach (JSONObject unit in json_units.list) {
+
+                UnitData tmp_ud = new UnitData ();
+
+                tmp_ud.name = unit.GetField ("name").str;
+                tmp_ud.max_hp = unit.GetField ("max_hp").f;
+                tmp_ud.atk = unit.GetField ("atk").f;
+                tmp_ud.atk_fre = unit.GetField ("atk_fre").f;
+                tmp_ud.def = unit.GetField ("def").f;
+                tmp_ud.speed = unit.GetField ("speed").f;
+                
+                unitDataList.Add (tmp_ud);
+            }
+        });
+    }
 
 }

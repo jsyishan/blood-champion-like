@@ -17,24 +17,22 @@ public class Spawner : MonoBehaviour {
         
 	}
 	
-	// Update is called once per frame
 	void Update () {
 
         timer += Time.deltaTime;
         if(timer >= spawn_time) {
             try {
-                Instantiate (Resources.Load (
-                    "Prefabs/Units/Unit_" + spawn.GetUnit()),
+                var go = Instantiate (Resources.Load (
+                    "Prefabs/Units/Unit_" + spawn.GetUnit().ToUpper()),
                     this.transform.position,
-                    new Quaternion (0, 0, 0, 0),
-                    this.transform
-                    );
-                
+                    new Quaternion (0, 0, 0, 0)
+                    ) as GameObject;
+                go.name = "Unit_" + spawn.GetUnit ().ToUpper ();
             } catch(Exception e) {
                 Debug.Log (e.Message);
             }
             timer = 0;
-            Destroy (this);
+            Destroy (this.gameObject);
         }
 
     }
