@@ -6,15 +6,29 @@ using UnityEngine.UI;
 
 public class SpawnUnit : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler {
 
+
+    public Text unitNameLabel;
+
     private Vector3 oriPos;
     private int spawn_order = 0;
     private string spawn_unit = "";
 
+    private Transform parentTrans;
+    private int oriSiblingIndex;
+
+    void Start() {
+
+        unitNameLabel.text = this.name;
+    }
 
     public void OnBeginDrag(PointerEventData e) {
 
         oriPos = this.gameObject.GetComponent<RectTransform> ().position;
         spawn_unit = this.gameObject.name;
+
+        parentTrans = transform.parent;
+        oriSiblingIndex = transform.GetSiblingIndex ();
+        transform.SetParent(transform.parent.parent.parent.parent.GetComponent<Transform>());
     }
 
     public void OnDrag(PointerEventData e) {
@@ -22,13 +36,16 @@ public class SpawnUnit : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         var rt = gameObject.GetComponent<RectTransform> ();
 
         Vector3 globalMousePos;
+
         if(RectTransformUtility.ScreenPointToWorldPointInRectangle (rt, e.position, e.pressEventCamera, out globalMousePos)) {
-            rt.position = globalMousePos;
+            rt.position = new Vector3(globalMousePos.x, globalMousePos.y, globalMousePos.z + 1);
         }
     }
 
     public void OnEndDrag(PointerEventData e) {
 
+        transform.SetParent (parentTrans);
+        transform.SetSiblingIndex (oriSiblingIndex);
         EndJudging (e);
     }
 
@@ -41,6 +58,13 @@ public class SpawnUnit : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
         if(target != null) {
             //Debug.Log ("Contained!");
+
+            //if (MainCore.spawn_manager.curMoney > MainCore.unit_manager.unitDataList.Find (delegate (UnitData ud) {
+            //    return ud.cost < ;
+            //}) {
+
+            //}
+
             MainCore.spawn_manager.AddSpawn (MainCore.spawn_manager.NewSpawn(spawn_unit, spawn_order));
 
             target.tag = "Untagged";

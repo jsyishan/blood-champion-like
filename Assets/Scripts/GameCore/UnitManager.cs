@@ -10,7 +10,7 @@ public class UnitManager : GameManager {
 
     public List<UnitData> unitDataList = new List<UnitData> ();
     private string jsonString;
-    JSONObject units_datas;
+    public JSONObject units_datas;
 
     public void Start() {
 
@@ -50,9 +50,11 @@ public class UnitManager : GameManager {
                 UnitData tmp_ud = new UnitData ();
 
                 tmp_ud.name = unit.GetField ("name").str;
+                tmp_ud.cost = (int) unit.GetField("cost").f;
                 tmp_ud.max_hp = unit.GetField ("max_hp").f;
                 tmp_ud.atk = unit.GetField ("atk").f;
                 tmp_ud.atk_fre = unit.GetField ("atk_fre").f;
+                tmp_ud.atk_fre = unit.GetField ("atk_dis").f;
                 tmp_ud.def = unit.GetField ("def").f;
                 tmp_ud.speed = unit.GetField ("speed").f;
                 

@@ -2,17 +2,23 @@
     "units": [
         {
             "name" : "Unit_R1",
+            "type" : "Remote",
+            "cost" : 5,
             "max_hp" : 500.0,
             "atk" : 50.0,
             "atk_fre" : 2.0,
+            "atk_dis" : 5.0,
             "def" : 30.0,
             "speed" : 10.0
         },
         {
             "name" : "Unit_R2",
+            "type" : "Remote",
+            "cost" : 10,
             "max_hp" : 700.0,
             "atk" : 45.0,
             "atk_fre" : 3.0,
+            "atk_dis" : 5.0,
             "def" : 40.0,
             "speed" : 5.0
         }

@@ -11,8 +11,10 @@ public class Unit : MonoBehaviour {
     public float max_hp;
     public float atk;
     public float atk_fre;
+    public float atk_dis;
     public float def;
     public float speed;
+
 
 
     void Start() {
@@ -56,6 +58,7 @@ public class Unit : MonoBehaviour {
                 max_hp = ud.max_hp;
                 atk = ud.atk;
                 atk_fre = ud.atk_fre;
+                atk_dis = ud.atk_dis;
                 def = ud.def;
                 speed = ud.speed;
 
@@ -63,11 +66,5 @@ public class Unit : MonoBehaviour {
             }
         }
     }
-
-}
-
-public class RemoteUnit : Unit {
-
-    public float atkDistance;
 
 }

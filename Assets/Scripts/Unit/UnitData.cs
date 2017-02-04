@@ -7,9 +7,11 @@ using UnityEngine;
 public class UnitData {
 
     public string name;
+    public int cost;
     public float max_hp;
     public float atk;
     public float atk_fre;
+    public float atk_dis;
     public float def;
     public float speed;
 
