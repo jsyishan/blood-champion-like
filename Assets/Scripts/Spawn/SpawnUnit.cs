@@ -10,6 +10,7 @@ public class SpawnUnit : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     public Text unitNameLabel;
 
     private Vector3 oriPos;
+    private Vector3 oriScale;
     private int spawn_order = 0;
     private string spawn_unit = "";
 
@@ -24,28 +25,32 @@ public class SpawnUnit : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     public void OnBeginDrag(PointerEventData e) {
 
         oriPos = this.gameObject.GetComponent<RectTransform> ().position;
+        oriScale = this.gameObject.GetComponent<RectTransform> ().localScale;
         spawn_unit = this.gameObject.name;
 
         parentTrans = transform.parent;
         oriSiblingIndex = transform.GetSiblingIndex ();
-        transform.SetParent(transform.parent.parent.parent.parent.GetComponent<Transform>());
+        transform.SetParent (transform.parent.parent.parent.parent.GetComponent<Transform> ());
     }
 
     public void OnDrag(PointerEventData e) {
 
         var rt = gameObject.GetComponent<RectTransform> ();
+        rt.localScale = oriScale * 0.6f;
 
         Vector3 globalMousePos;
 
-        if(RectTransformUtility.ScreenPointToWorldPointInRectangle (rt, e.position, e.pressEventCamera, out globalMousePos)) {
-            rt.position = new Vector3(globalMousePos.x, globalMousePos.y, globalMousePos.z + 1);
+        if (RectTransformUtility.ScreenPointToWorldPointInRectangle (rt, e.position, e.pressEventCamera, out globalMousePos)) {
+            rt.position = new Vector3 (globalMousePos.x, globalMousePos.y, globalMousePos.z + 1);
         }
     }
 
     public void OnEndDrag(PointerEventData e) {
 
-        transform.SetParent (parentTrans);
-        transform.SetSiblingIndex (oriSiblingIndex);
+        this.transform.SetParent (parentTrans);
+        this.transform.SetSiblingIndex (oriSiblingIndex);
+        this.transform.localScale = oriScale;
+
         EndJudging (e);
     }
 
@@ -56,7 +61,7 @@ public class SpawnUnit : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
         var target = SpawnOrder (rt);
 
-        if(target != null) {
+        if (target != null) {
             //Debug.Log ("Contained!");
 
             //if (MainCore.spawn_manager.curMoney > MainCore.unit_manager.unitDataList.Find (delegate (UnitData ud) {
@@ -65,12 +70,12 @@ public class SpawnUnit : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
             //}
 
-            MainCore.spawn_manager.AddSpawn (MainCore.spawn_manager.NewSpawn(spawn_unit, spawn_order));
+            MainCore.spawn_manager.AddSpawn (MainCore.spawn_manager.NewSpawn (spawn_unit, spawn_order));
 
             target.tag = "Untagged";
             target.gameObject.GetComponent<Image> ().material = Resources.Load ("Materials/spawn_zone_set") as Material;
 
-            target.gameObject.GetComponentInChildren<Text> ().text = spawn_unit.ToUpper();
+            target.gameObject.GetComponentInChildren<Text> ().text = spawn_unit.ToUpper ();
         } else {
             //Debug.Log ("Not correct space");
         }
@@ -84,40 +89,41 @@ public class SpawnUnit : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         GameObject[] all_spawn_zones = GameObject.FindGameObjectsWithTag ("spawn");
         RectTransform temp = null;
 
-        foreach(GameObject go in all_spawn_zones) {
+        foreach (GameObject go in all_spawn_zones) {
 
-            if(isContained (rt, go.GetComponent<RectTransform> ())) {
+            if (isContained (rt, go.GetComponent<RectTransform> ())) {
                 temp = go.GetComponent<RectTransform> ();
-                switch (go.transform.parent.name) {
-                    case "First_Spawn":
-                        //Debug.Log ("Order: 1");
-                        spawn_order = 1;
-                        break;
-                    case "Second_Spawn":
-                        //Debug.Log ("Order: 2");
-                        spawn_order = 2;
-                        break;
-                    case "Third_Spawn":
-                        //Debug.Log ("Order: 3");
-                        spawn_order = 3;
-                        break;
-                    case "Fourth_Spawn":
-                        //Debug.Log ("Order: 4");
-                        spawn_order = 4;
-                        break;
-                    case "Fifth_Spawn":
-                        //Debug.Log ("Order: 4");
-                        spawn_order = 5;
-                        break;
-                    case "Sixth_Spawn":
-                        //Debug.Log ("Order: 4");
-                        spawn_order = 6;
-                        break;
-                    default:
-                        //Debug.Log ("Not correct order");
-                        spawn_order = 0;
-                        break;
-                }
+                spawn_order = int.Parse (go.transform.parent.name.Substring (6));
+                //switch (go.transform.parent.name) {
+                //    case "First_Spawn":
+                //        //Debug.Log ("Order: 1");
+                //        spawn_order = 1;
+                //        break;
+                //    case "Second_Spawn":
+                //        //Debug.Log ("Order: 2");
+                //        spawn_order = 2;
+                //        break;
+                //    case "Third_Spawn":
+                //        //Debug.Log ("Order: 3");
+                //        spawn_order = 3;
+                //        break;
+                //    case "Fourth_Spawn":
+                //        //Debug.Log ("Order: 4");
+                //        spawn_order = 4;
+                //        break;
+                //    case "Fifth_Spawn":
+                //        //Debug.Log ("Order: 4");
+                //        spawn_order = 5;
+                //        break;
+                //    case "Sixth_Spawn":
+                //        //Debug.Log ("Order: 4");
+                //        spawn_order = 6;
+                //        break;
+                //    default:
+                //        //Debug.Log ("Not correct order");
+                //        spawn_order = 0;
+                //        break;
+                //}
             }
         }
         return temp;
@@ -127,7 +133,7 @@ public class SpawnUnit : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     private bool isContained(RectTransform whichIn, RectTransform whichHere) {
 
         Vector3 VecIn, VecHere;
-        if(RectTransformUtility.ScreenPointToWorldPointInRectangle (
+        if (RectTransformUtility.ScreenPointToWorldPointInRectangle (
                 whichIn,
                 Camera.main.WorldToScreenPoint (whichIn.position),
                 Camera.main,
@@ -140,7 +146,7 @@ public class SpawnUnit : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
             //Debug.Log(VecIn);
             //Debug.Log(VecHere);
-            if(Mathf.Abs (VecIn.x - VecHere.x) < 0.2 && Mathf.Abs (VecIn.y - VecHere.y) < 0.2) {
+            if (Mathf.Abs (VecIn.x - VecHere.x) < 0.2 && Mathf.Abs (VecIn.y - VecHere.y) < 0.2) {
                 return true;
             } else {
                 return false;

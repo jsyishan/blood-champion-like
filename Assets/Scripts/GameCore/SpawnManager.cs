@@ -10,7 +10,7 @@ public class SpawnManager : GameManager {
 
     public float curMoney = 15f;  //Current Money which can be used to pay for each spawn.
 
-    private int ORDER_COUNT = 6;
+    private int ORDER_COUNT = 13;
 
     public void Start() {
 

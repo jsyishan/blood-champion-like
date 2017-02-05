@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class SpawnCore : MonoBehaviour {
 
+    public float SPAWN_TIME = 2.0f;
+
     [Header ("Spawn Field")]
     public Transform[] spawn_field = null;
 
-
-    public float SPAWN_TIME = 2.0f;
     private float spawn_time = 2.0f;
 
 
