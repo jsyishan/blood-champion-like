@@ -12,6 +12,7 @@ public class Spawn {
 
         spawn_unit = unit;
         spawn_order = order;
+
     }
 
     public string GetUnit() {
@@ -20,6 +21,10 @@ public class Spawn {
 
     public int GetOrder() {
         return spawn_order;
+    }
+
+    public int GetCost() {
+        return spawn_cost;
     }
 
 }

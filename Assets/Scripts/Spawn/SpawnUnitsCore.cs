@@ -1,14 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SpawnUnitsCore : MonoBehaviour {
 
 
-    [Header("Contents")]
     public Transform[] contentPanels;
 
+    public Text curMoney;
+
     void Start() {
+
+        Setup ();
+        curMoney.text = MainCore.spawn_manager.curMoney.ToString();
+    }
+
+    private void Setup() {
 
         var datas = MainCore.unit_manager.units_datas;
 
@@ -16,28 +24,29 @@ public class SpawnUnitsCore : MonoBehaviour {
 
             foreach (JSONObject unit in json_units.list) {
                 var unitName = unit.GetField ("name").str;
+                var unitId = unit.GetField ("id").str;
                 switch (unit.GetField ("type").str) {
                     case "Melee":
-                    CreateUnits (0, unitName);
+                    CreateUnits (0, unitName, unitId);
                     break;
 
                     case "Remote":
-                    CreateUnits (1, unitName);
+                    CreateUnits (1, unitName, unitId);
                     break;
 
                     case "Auxilary":
-                    CreateUnits (2, unitName);
+                    CreateUnits (2, unitName, unitId);
                     break;
                 }
             }
         });
     }
 
-    private void CreateUnits(int index, string unitName) {
+    private void CreateUnits(int index, string unitName, string unitId) {
 
-        var unit = Instantiate (Resources.Load ("Prefabs/SpawnUnit"), contentPanels[index]);
-        unit.name = unitName.Substring (5);
-        
+        var unit = Instantiate (Resources.Load ("Prefabs/SpawnUnit"), contentPanels[index]) as GameObject;
+        unit.name = unitId.Substring(5);
+        unit.GetComponentInChildren<Text> ().text = unitName;
     }
 
 }

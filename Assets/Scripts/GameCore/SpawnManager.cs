@@ -8,12 +8,12 @@ public class SpawnManager : GameManager {
     List<Spawn> spawn_list = new List<Spawn> ();
     public List<List<Spawn>> spawn_order = new List<List<Spawn>> ();
 
-    public float curMoney = 15f;  //Current Money which can be used to pay for each spawn.
 
-    private int ORDER_COUNT = 13;
+    public int curMoney = 15;  //Current Money which can be used to pay for each spawn.
+
+    private int ORDER_COUNT = 13;  //The amount of the spawn orders
 
     public void Start() {
-
     }
 
     public void Update() {

@@ -1,7 +1,8 @@
 {
     "units": [
         {
-            "name" : "Unit_R1",
+            "id" : "Unit_R1",
+            "name" : "Tank",
             "type" : "Remote",
             "cost" : 5,
             "max_hp" : 500.0,
@@ -12,7 +13,8 @@
             "speed" : 10.0
         },
         {
-            "name" : "Unit_R2",
+            "id" : "Unit_R2",
+            "name" : "Tank II",
             "type" : "Remote",
             "cost" : 10,
             "max_hp" : 700.0,

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -12,6 +13,7 @@ public class SpawnUnit : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     private Vector3 oriPos;
     private Vector3 oriScale;
     private int spawn_order = 0;
+    private int spawn_cost = 0;
     private string spawn_unit = "";
 
     private Transform parentTrans;
@@ -19,7 +21,7 @@ public class SpawnUnit : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
     void Start() {
 
-        unitNameLabel.text = this.name;
+        //unitNameLabel.text = this.name;
     }
 
     public void OnBeginDrag(PointerEventData e) {
@@ -58,24 +60,34 @@ public class SpawnUnit : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     private void EndJudging(PointerEventData e) {
 
         var rt = gameObject.GetComponent<RectTransform> ();
-
         var target = SpawnOrder (rt);
+
+        var suc = GameObject.Find ("SpawnUnitsCore").GetComponent<SpawnUnitsCore> ();
 
         if (target != null) {
             //Debug.Log ("Contained!");
 
-            //if (MainCore.spawn_manager.curMoney > MainCore.unit_manager.unitDataList.Find (delegate (UnitData ud) {
-            //    return ud.cost < ;
-            //}) {
+            //Func<List<Spawn>, bool> cost = c =>
+            //{
+            //    MainCore.spawn_manager.GetSpawnList ().CopyTo (c.ToArray());
+            //    return c.
+            //};
 
+            //if (MainCore.spawn_manager.curMoney > ) {
+
+                MainCore.spawn_manager.AddSpawn (MainCore.spawn_manager.NewSpawn (spawn_unit, spawn_order));
+
+                target.tag = "Untagged";
+                target.gameObject.GetComponent<Image> ().material = Resources.Load ("Materials/spawn_zone_set") as Material;
+
+                var spawnText = target.gameObject.GetComponentInChildren<Text> ();
+                spawnText.text = unitNameLabel.text;
+                spawnText.fontSize = 33;
+
+                //MainCore.spawn_manager.curMoney -= 
+                //suc.curMoney.text -= 
             //}
 
-            MainCore.spawn_manager.AddSpawn (MainCore.spawn_manager.NewSpawn (spawn_unit, spawn_order));
-
-            target.tag = "Untagged";
-            target.gameObject.GetComponent<Image> ().material = Resources.Load ("Materials/spawn_zone_set") as Material;
-
-            target.gameObject.GetComponentInChildren<Text> ().text = spawn_unit.ToUpper ();
         } else {
             //Debug.Log ("Not correct space");
         }

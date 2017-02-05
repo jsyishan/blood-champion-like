@@ -49,8 +49,11 @@ public class UnitManager : GameManager {
 
                 UnitData tmp_ud = new UnitData ();
 
+                tmp_ud.id = unit.GetField ("id").str;
                 tmp_ud.name = unit.GetField ("name").str;
+
                 tmp_ud.cost = (int) unit.GetField("cost").f;
+
                 tmp_ud.max_hp = unit.GetField ("max_hp").f;
                 tmp_ud.atk = unit.GetField ("atk").f;
                 tmp_ud.atk_fre = unit.GetField ("atk_fre").f;
