@@ -7,7 +7,7 @@ public class StartandExit : MonoBehaviour {
 
     public void StartGame() {
 
-        MainCore.scene_manager.ChangeScene(MainCore.scene_manager.CreateLevel("spawn"));
+        MainCore.scene_manager.ChangeScene (MainCore.scene_manager.CreateLevel ("spawn"));
     }
 
     public void Exit() {

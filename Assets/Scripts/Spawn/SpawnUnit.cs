@@ -55,16 +55,6 @@ public class SpawnUnit : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         EndJudging (e);
     }
 
-    private int GetCost() {
-
-        foreach (UnitData ud in MainCore.unit_manager.unitDataList) {
-            if (ud.id.Substring(5) == spawn_unit) {
-                //Debug.Log (ud.cost);
-                return ud.cost;
-            }
-        }
-        return 0;
-    }
 
     private void EndJudging(PointerEventData e) {
 
@@ -75,6 +65,16 @@ public class SpawnUnit : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
         if (target != null) {
             //Debug.Log ("Contained!");
+
+            Func<int> GetCost = () => {
+                foreach (UnitData ud in MainCore.unit_manager.unitDataList) {
+                    if (ud.id.Substring (5) == spawn_unit) {
+                        //Debug.Log (ud.cost);
+                        return ud.cost;
+                    }
+                }
+                return 0;
+            };
             var cost = GetCost ();
 
             if (MainCore.spawn_manager.curMoney >= cost) {
@@ -108,7 +108,7 @@ public class SpawnUnit : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
         foreach (GameObject go in all_spawn_zones) {
 
-            if (isContained (rt, go.GetComponent<RectTransform> ())) {
+            if (IsContained (rt, go.GetComponent<RectTransform> ())) {
                 temp = go.GetComponent<RectTransform> ();
                 spawn_order = int.Parse (go.transform.parent.name.Substring (6));
                 //switch (go.transform.parent.name) {
@@ -147,7 +147,7 @@ public class SpawnUnit : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     }
 
 
-    private bool isContained(RectTransform whichIn, RectTransform whichHere) {
+    private bool IsContained(RectTransform whichIn, RectTransform whichHere) {
 
         Vector3 VecIn, VecHere;
         if (RectTransformUtility.ScreenPointToWorldPointInRectangle (

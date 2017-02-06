@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
-public class UnitManager : GameManager {
+public class UnitManager : IGameManager {
 
     public List<Unit> units = new List<Unit> ();
 
@@ -40,6 +40,7 @@ public class UnitManager : GameManager {
             Debug.LogError ("Cannot load json file!");
         }
     }
+
 
     private void CreateAllUnitData() {
 

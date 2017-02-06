@@ -10,7 +10,7 @@ public class SpawnCore : MonoBehaviour {
     [Header ("Spawn Field")]
     public Transform[] spawn_field = null;
 
-    private float spawn_time = 2.0f;
+    private float spawn_time = 0f;
 
 
     void Start() {
@@ -23,8 +23,8 @@ public class SpawnCore : MonoBehaviour {
                     this.transform
                     ) as GameObject;
                 var spawner = go.GetComponent<Spawner> ();
-                spawner.SetSpawnData (s, spawn_time);
                 spawn_time += SPAWN_TIME;
+                spawner.SetSpawnData (s, spawn_time);
             }
         }
 

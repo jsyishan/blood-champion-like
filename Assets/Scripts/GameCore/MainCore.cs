@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface GameManager {
+public interface IGameManager {
 
     void Start();
     void Update();
@@ -12,11 +12,11 @@ public interface GameManager {
 
 public class MainCore : MonoBehaviour {
 
-    public static ISceneManager scene_manager = new ISceneManager();
+    public static GameSceneManager scene_manager = new GameSceneManager();
     public static SpawnManager spawn_manager = new SpawnManager();
     public static UnitManager unit_manager = new UnitManager ();
 
-    List<GameManager> game_manager = new List<GameManager>();
+    List<IGameManager> game_manager = new List<IGameManager>();
 
 
     void Awake () {

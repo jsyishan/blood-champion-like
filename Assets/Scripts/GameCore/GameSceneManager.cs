@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class ISceneManager : GameManager {
+public class GameSceneManager : IGameManager {
 
     public Scene nowScene = null;
 

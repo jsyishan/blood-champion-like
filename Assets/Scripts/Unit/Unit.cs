@@ -18,7 +18,6 @@ public class Unit : MonoBehaviour {
     public float speed;
 
 
-
     void Start() {
 
         MainCore.unit_manager.units.Add (this.GetComponent<Unit> ());
@@ -49,25 +48,5 @@ public class Unit : MonoBehaviour {
         }
     }
 
-    public Unit GetEnemy(GameObject go) {
-
-        if(go != null) {
-            return go.GetComponent<Unit> ();
-        } else {
-            return null;
-        }
-    }
-
-    public void BeDamaged(Unit enemy) {
-        hp -= enemy.atk - def;
-    }
-
-    public void Attack() {
-
-    }
-
-    public void BeSpawned() {
-
-    }
 
 }

@@ -22,25 +22,25 @@ public class SpawnPanel : MonoBehaviour {
         }
     }
 
-    private void moveThis() {
+    private void MoveThis() {
 
         thisPanel.anchoredPosition = new Vector2(-3000, -421);
     }
 
-    private void recoveryThis() {
+    private void RecoveryThis() {
 
         thisPanel.anchoredPosition = new Vector2(0, -421);
     }
 
     public void SwitchTo(int index) {
 
-        moveThis();
+        MoveThis();
         rects[index].anchoredPosition = new Vector2(0, 307);
     }
 
     public void BackTo(int index) {
 
-        recoveryThis();
+        RecoveryThis();
         rects[index].anchoredPosition = vecs[index];
     }
 

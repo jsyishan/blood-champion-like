@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SpawnManager : GameManager {
+public class SpawnManager : IGameManager {
 
     List<Spawn> spawn_list = new List<Spawn> ();
     public List<List<Spawn>> spawn_order = new List<List<Spawn>> ();
