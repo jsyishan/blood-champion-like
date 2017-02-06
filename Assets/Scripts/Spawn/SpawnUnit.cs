@@ -13,7 +13,6 @@ public class SpawnUnit : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     private Vector3 oriPos;
     private Vector3 oriScale;
     private int spawn_order = 0;
-    private int spawn_cost = 0;
     private string spawn_unit = "";
 
     private Transform parentTrans;
@@ -56,6 +55,16 @@ public class SpawnUnit : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         EndJudging (e);
     }
 
+    private int GetCost() {
+
+        foreach (UnitData ud in MainCore.unit_manager.unitDataList) {
+            if (ud.id.Substring(5) == spawn_unit) {
+                //Debug.Log (ud.cost);
+                return ud.cost;
+            }
+        }
+        return 0;
+    }
 
     private void EndJudging(PointerEventData e) {
 
@@ -66,14 +75,9 @@ public class SpawnUnit : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
         if (target != null) {
             //Debug.Log ("Contained!");
+            var cost = GetCost ();
 
-            //Func<List<Spawn>, bool> cost = c =>
-            //{
-            //    MainCore.spawn_manager.GetSpawnList ().CopyTo (c.ToArray());
-            //    return c.
-            //};
-
-            //if (MainCore.spawn_manager.curMoney > ) {
+            if (MainCore.spawn_manager.curMoney >= cost) {
 
                 MainCore.spawn_manager.AddSpawn (MainCore.spawn_manager.NewSpawn (spawn_unit, spawn_order));
 
@@ -84,9 +88,10 @@ public class SpawnUnit : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
                 spawnText.text = unitNameLabel.text;
                 spawnText.fontSize = 33;
 
-                //MainCore.spawn_manager.curMoney -= 
-                //suc.curMoney.text -= 
-            //}
+                MainCore.spawn_manager.curMoney -= cost;
+                suc.UpdateCurMoney ();
+            }
+
 
         } else {
             //Debug.Log ("Not correct space");

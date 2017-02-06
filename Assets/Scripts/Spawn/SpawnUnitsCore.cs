@@ -13,7 +13,7 @@ public class SpawnUnitsCore : MonoBehaviour {
     void Start() {
 
         Setup ();
-        curMoney.text = MainCore.spawn_manager.curMoney.ToString();
+        UpdateCurMoney ();
     }
 
     private void Setup() {
@@ -47,6 +47,10 @@ public class SpawnUnitsCore : MonoBehaviour {
         var unit = Instantiate (Resources.Load ("Prefabs/SpawnUnit"), contentPanels[index]) as GameObject;
         unit.name = unitId.Substring(5);
         unit.GetComponentInChildren<Text> ().text = unitName;
+    }
+
+    public void UpdateCurMoney() {
+        curMoney.text = MainCore.spawn_manager.curMoney.ToString ();
     }
 
 }

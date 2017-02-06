@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour {
 
+
+    public int cost;
     public float hp;
 
     public float max_hp;
@@ -28,6 +30,24 @@ public class Unit : MonoBehaviour {
         MainCore.unit_manager.units.Remove (this.GetComponent<Unit> ());
     }
 
+    private void GetData() {
+
+        foreach (UnitData ud in MainCore.unit_manager.unitDataList) {
+
+            if (ud.name == this.name) {
+                cost = ud.cost;
+
+                max_hp = ud.max_hp;
+                atk = ud.atk;
+                atk_fre = ud.atk_fre;
+                atk_dis = ud.atk_dis;
+                def = ud.def;
+                speed = ud.speed;
+
+                hp = max_hp;
+            }
+        }
+    }
 
     public Unit GetEnemy(GameObject go) {
 
@@ -48,23 +68,6 @@ public class Unit : MonoBehaviour {
 
     public void BeSpawned() {
 
-    }
-
-    protected void GetData() {
-
-        foreach (UnitData ud in MainCore.unit_manager.unitDataList) {
-
-            if (ud.name == this.name) {
-                max_hp = ud.max_hp;
-                atk = ud.atk;
-                atk_fre = ud.atk_fre;
-                atk_dis = ud.atk_dis;
-                def = ud.def;
-                speed = ud.speed;
-
-                hp = max_hp;
-            }
-        }
     }
 
 }

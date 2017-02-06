@@ -20,9 +20,7 @@ public class MainCore : MonoBehaviour {
 
 
     void Awake () {
-
-        DontDestroyOnLoad(transform.gameObject);
-
+   
         game_manager.Add(scene_manager);
         game_manager.Add (spawn_manager);
         game_manager.Add (unit_manager);
