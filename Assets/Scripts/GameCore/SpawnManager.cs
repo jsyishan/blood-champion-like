@@ -24,6 +24,7 @@ public class SpawnManager : IGameManager {
 
     }
 
+
     private void CreateSpawnOrder() {
 
         for(int i = 1; i < ORDER_COUNT + 1; i++) {

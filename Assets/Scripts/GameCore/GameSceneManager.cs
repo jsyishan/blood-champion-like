@@ -24,6 +24,7 @@ public class GameSceneManager : IGameManager {
 
     }
 
+
     public void ChangeScene(Scene s) {
 
         if (nowScene != null) {

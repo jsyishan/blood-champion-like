@@ -27,6 +27,8 @@ public class UnitManager : IGameManager {
 
     }
 
+
+
     private void LoadDataFromJson() {
 
         string jsonDataFilePath = Application.dataPath + "/Others/unit_datas.json";
