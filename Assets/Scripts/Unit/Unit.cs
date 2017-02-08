@@ -33,7 +33,7 @@ public class Unit : MonoBehaviour {
 
         foreach (UnitData ud in MainCore.unit_manager.unitDataList) {
 
-            if (ud.name == this.name) {
+            if (ud.id == this.name) {
                 cost = ud.cost;
 
                 max_hp = ud.max_hp;
@@ -47,6 +47,5 @@ public class Unit : MonoBehaviour {
             }
         }
     }
-
 
 }

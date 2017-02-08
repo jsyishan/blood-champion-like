@@ -4,7 +4,7 @@
             "id" : "Unit_R1",
             "name" : "Tank",
             "type" : "Remote",
-            "cost" : 5,
+            "cost" : 0,
             "max_hp" : 500.0,
             "atk" : 50.0,
             "atk_fre" : 2.0,

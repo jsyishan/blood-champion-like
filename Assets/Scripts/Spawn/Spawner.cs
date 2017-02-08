@@ -14,7 +14,6 @@ public class Spawner : MonoBehaviour {
 
 	void Start () {
         //Debug.Log (spawn_time);
-        
 	}
 	
 	void Update () {

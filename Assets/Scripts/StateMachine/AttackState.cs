@@ -24,19 +24,27 @@ public class AttackState : IEnemyState {
     }
 
     public void ToIdleState() {
-
+        self.curEnemyState = self.idleState;
     }
 
     public void ToSearchState() {
-
+        self.curEnemyState = self.searchState;
     }
 
     public void ToPatrolState() {
-
+        self.curEnemyState = self.patrolState;
     }
 
     public void ToAttackState() {
         Debug.Log ("Unable to transition to same state!");
+    }
+
+    private void Approach() {
+
+    }
+
+    private void Attack() {
+
     }
 
 }

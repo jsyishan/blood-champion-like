@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public interface IGameManager {
 
@@ -11,6 +12,8 @@ public interface IGameManager {
 
 public class MainCore : MonoBehaviour {
 
+    [HideInInspector] public static JSONObject configData; 
+
     public static GameSceneManager scene_manager = new GameSceneManager();
     public static SpawnManager spawn_manager = new SpawnManager();
     public static UnitManager unit_manager = new UnitManager ();
@@ -20,7 +23,9 @@ public class MainCore : MonoBehaviour {
 
 
     void Awake () {
-   
+
+        LoadGameConfigJsonFile ();
+
         game_manager.Add(scene_manager);
         game_manager.Add (spawn_manager);
         game_manager.Add (unit_manager);
@@ -54,5 +59,15 @@ public class MainCore : MonoBehaviour {
         }
     }
 
+    private void LoadGameConfigJsonFile() {
+
+        var jsonString = Application.dataPath + "/Others/config.json";
+
+        if (File.Exists (jsonString)) {
+            configData = new JSONObject (File.ReadAllText (jsonString));
+        } else {
+            Debug.LogError ("Cannot load json file!");
+        }
+    }
 
 }

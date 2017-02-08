@@ -17,6 +17,7 @@ public class PatrolState : IEnemyState {
 
     public void Update() {
 
+        Patrol ();
     }
 
     public void OnTriggerEnter(Collider other) {
@@ -37,5 +38,10 @@ public class PatrolState : IEnemyState {
 
     public void ToAttackState() {
         self.curEnemyState = self.attackState;
+    }
+
+    private void Patrol() {
+
+
     }
 }

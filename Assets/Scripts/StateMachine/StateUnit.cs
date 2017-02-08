@@ -1,9 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class StateUnit : MonoBehaviour {
 
+    public Transform eyes;
+    public Transform navPoint;
+
+    public float atkDistance;
+    public float sightRange = 20f;
+    public Vector3 offsetToEyes = new Vector3 (0f, 8f, 0f);
+
+    [HideInInspector] public Transform target;
     [HideInInspector] public IEnemyState curEnemyState;
 
     //Declare more states below ...
@@ -12,7 +21,11 @@ public class StateUnit : MonoBehaviour {
     [HideInInspector] public PatrolState patrolState;
     [HideInInspector] public AttackState attackState;
 
+
+    [HideInInspector] public NavMeshAgent navMeshAgent;
     private List<IEnemyState> state_list = new List<IEnemyState> ();
+
+    private Unit unit;
 
     void Awake() {
 
@@ -28,7 +41,8 @@ public class StateUnit : MonoBehaviour {
         state_list.Add (patrolState);
         state_list.Add (attackState);
 
-
+        navMeshAgent = GetComponent<NavMeshAgent> ();
+        navPoint = GameObject.Find("NavPoint").GetComponent<Transform>();
         MainCore.state_manager.AddStateUnit (this);
     }
 
@@ -50,6 +64,12 @@ public class StateUnit : MonoBehaviour {
 
     void OnDestroy() {
         MainCore.state_manager.RemoveStateUnit (this);
+    }
+
+    private void InitUnitData() {
+
+        unit = this.GetComponent<Unit> ();
+        atkDistance = unit.atk_dis;
     }
 }
     

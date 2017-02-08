@@ -17,6 +17,7 @@ public class SearchState : IEnemyState {
 
     public void Update() {
 
+        Look ();
     }
 
     public void OnTriggerEnter(Collider other) {
@@ -24,7 +25,7 @@ public class SearchState : IEnemyState {
     }
 
     public void ToIdleState() {
-
+        self.curEnemyState = self.idleState;
     }
 
     public void ToSearchState() {
@@ -32,10 +33,19 @@ public class SearchState : IEnemyState {
     }
 
     public void ToPatrolState() {
-
+        self.curEnemyState = self.patrolState;
     }
 
     public void ToAttackState() {
+        self.curEnemyState = self.attackState;
+    }
 
+    private void Look() {
+
+        RaycastHit hit;
+        if (Physics.Raycast (self.eyes.transform.position, self.eyes.transform.forward, out hit, self.sightRange) && hit.collider.CompareTag ("Unit")) {
+            self.target = hit.transform;
+            ToAttackState ();
+        }
     }
 }

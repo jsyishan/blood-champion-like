@@ -9,11 +9,12 @@ public class SpawnManager : IGameManager {
     public List<List<Spawn>> spawn_order = new List<List<Spawn>> ();
 
 
-    public int curMoney = 15;  //Current Money which can be used to pay for each spawn.
+    public int curMoney;  //Current Money which can be used to pay for each spawn, revise it in 'config.json' 
 
     private int ORDER_COUNT = 13;  //The amount of the spawn orders
 
     public void Start() {
+        curMoney = (int) MainCore.configData.GetField ("START_MONEY").f;
     }
 
     public void Update() {

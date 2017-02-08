@@ -16,6 +16,8 @@ public class IdleState : IEnemyState {
 
     public void Update() {
 
+        Look ();
+        MoveToNavPoint ();
     }
 
     public void OnTriggerEnter(Collider other) {
@@ -27,14 +29,28 @@ public class IdleState : IEnemyState {
     }
 
     public void ToSearchState() {
-
+        self.curEnemyState = self.searchState;
     }
 
     public void ToPatrolState() {
-
+        self.curEnemyState = self.patrolState;
     }
 
     public void ToAttackState() {
+        self.curEnemyState = self.attackState;
+    }
 
+
+    private void MoveToNavPoint() {
+        self.navMeshAgent.destination = self.navPoint.position;
+    }
+
+    private void Look() {
+
+        RaycastHit hit;
+        if (Physics.Raycast (self.eyes.transform.position, self.eyes.transform.forward, out hit, self.sightRange) && hit.collider.CompareTag ("Unit")) {
+            self.target = hit.transform;
+            ToSearchState ();
+        }
     }
 }
