@@ -40,6 +40,13 @@ public class IdleState : IEnemyState {
         self.curEnemyState = self.attackState;
     }
 
+    public void ToWaitState() {
+        self.curEnemyState = self.waitState;
+    }
+
+    public void ToDeadState() {
+        self.curEnemyState = self.deadState;
+    }
 
     private void MoveToNavPoint() {
         self.navMeshAgent.destination = self.navPoint.position;

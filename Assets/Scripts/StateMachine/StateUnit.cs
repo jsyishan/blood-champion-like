@@ -20,7 +20,8 @@ public class StateUnit : MonoBehaviour {
     [HideInInspector] public SearchState searchState;
     [HideInInspector] public PatrolState patrolState;
     [HideInInspector] public AttackState attackState;
-
+    [HideInInspector] public WaitState waitState;
+    [HideInInspector] public DeadState deadState;
 
     [HideInInspector] public NavMeshAgent navMeshAgent;
     private List<IEnemyState> state_list = new List<IEnemyState> ();

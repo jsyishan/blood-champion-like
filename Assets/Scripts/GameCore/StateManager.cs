@@ -14,6 +14,8 @@ public interface IEnemyState {
     void ToSearchState();
     void ToPatrolState();
     void ToAttackState();
+    void ToWaitState();
+    void ToDeadState();
 
 }
 

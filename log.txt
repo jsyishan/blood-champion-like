@@ -1,0 +1,2 @@
+1. modify state:
+	add 'wait', 'search' and 'dead' state.

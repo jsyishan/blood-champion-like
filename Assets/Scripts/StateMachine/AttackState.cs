@@ -39,6 +39,14 @@ public class AttackState : IEnemyState {
         Debug.Log ("Unable to transition to same state!");
     }
 
+    public void ToWaitState() {
+        self.curEnemyState = self.waitState;
+    }
+
+    public void ToDeadState() {
+        self.curEnemyState = self.deadState;
+    }
+
     private void Approach() {
 
     }
