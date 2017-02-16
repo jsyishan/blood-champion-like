@@ -43,7 +43,7 @@ public class SearchState : IEnemyState {
     private void Look() {
 
         RaycastHit hit;
-        if (Physics.Raycast (self.eyes.transform.position, self.eyes.transform.forward, out hit, self.sightRange) && hit.collider.CompareTag ("Unit")) {
+        if (Physics.Raycast (self.eyes.transform.position, self.eyes.transform.forward, out hit, self.sightRange) && hit.collider.CompareTag ("AI")) {
             self.target = hit.transform;
             ToAttackState ();
         }

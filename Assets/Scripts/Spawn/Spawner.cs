@@ -27,6 +27,7 @@ public class Spawner : MonoBehaviour {
                     new Quaternion (0, 0, 0, 0)
                     ) as GameObject;
                 go.name = "Unit_" + spawn.GetUnit ().ToUpper ();
+                go.tag = "Unit";
             } catch(Exception e) {
                 Debug.Log (e.Message);
             }
