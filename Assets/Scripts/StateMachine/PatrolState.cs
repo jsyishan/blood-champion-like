@@ -40,6 +40,14 @@ public class PatrolState : IEnemyState {
         self.curEnemyState = self.attackState;
     }
 
+    public void ToWaitState() {
+        self.curEnemyState = self.waitState;
+    }
+
+    public void ToDeadState() {
+        self.curEnemyState = self.deadState;
+    }
+
     private void Patrol() {
 
         RaycastHit hit;

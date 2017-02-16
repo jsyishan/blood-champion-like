@@ -20,7 +20,8 @@ public class StateUnit : MonoBehaviour {
     [HideInInspector] public SearchState searchState;
     [HideInInspector] public PatrolState patrolState;
     [HideInInspector] public AttackState attackState;
-
+    [HideInInspector] public WaitState waitState;
+    [HideInInspector] public DeadState deadState;
 
     [HideInInspector] public NavMeshAgent navMeshAgent;
     private List<IEnemyState> state_list = new List<IEnemyState> ();
@@ -34,12 +35,16 @@ public class StateUnit : MonoBehaviour {
         searchState = new SearchState (this);
         patrolState = new PatrolState (this);
         attackState = new AttackState (this);
+        waitState = new WaitState (this);
+        deadState = new DeadState (this);
 
         //Add more states into the 'state_list' below ...
         state_list.Add (idleState);
         state_list.Add (searchState);
         state_list.Add (patrolState);
         state_list.Add (attackState);
+        state_list.Add (waitState);
+        state_list.Add (deadState);
 
         navMeshAgent = GetComponent<NavMeshAgent> ();
         navPoint = GameObject.Find("NavPoint").GetComponent<Transform>();
@@ -47,6 +52,8 @@ public class StateUnit : MonoBehaviour {
     }
 
     void Start() {
+
+        //The first state 
         curEnemyState = idleState;
     }
 

@@ -18,6 +18,7 @@ public class MainCore : MonoBehaviour {
     public static SpawnManager spawn_manager = new SpawnManager();
     public static UnitManager unit_manager = new UnitManager ();
     public static StateManager state_manager = new StateManager ();
+    public static ActionManager action_manager = new ActionManager ();
 
     List<IGameManager> game_manager = new List<IGameManager>();
 
@@ -30,6 +31,7 @@ public class MainCore : MonoBehaviour {
         game_manager.Add (spawn_manager);
         game_manager.Add (unit_manager);
         game_manager.Add (state_manager);
+        game_manager.Add (action_manager);
 
         for (int i = 0; i < game_manager.Count; i++) {
             game_manager[i].Start();
